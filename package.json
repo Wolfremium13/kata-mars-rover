@@ -1,7 +1,7 @@
 {
-  "name": "guacamole",
+  "name": "kata-mars-rover",
   "version": "1.0.0",
-  "description": "Poryect to convert markdown files into PDF.",
+  "description": "Just a Kata to practice TDD and Clean Code",
   "main": "dist/index.js",
   "scripts": {
     "execute": "npm run compile:build && node dist/index.js",
