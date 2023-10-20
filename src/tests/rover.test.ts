@@ -20,13 +20,6 @@ describe('Rover should', () => {
 
 			expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(0, 1), mars));
 		});
-		it('forward twice', () => {
-			const rover = new Rover(defaultDirection, defaultCoordinate, mars);
-
-			rover.executeCommands(['F', 'F']);
-
-			expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(0, 2), mars));
-		});
 
 		it('backward', () => {
 			const startCoordinate = new Coordinate(0, 1);
@@ -37,15 +30,15 @@ describe('Rover should', () => {
 			expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(0, 0), mars));
 		});
 
-		it('backward twice', () => {
-			const neptune = new Planet(5, 5);
-			const startCoordinate = new Coordinate(0, 4);
-			const rover = new Rover(defaultDirection, startCoordinate, neptune);
+		it('passing the edge of the planet', () => {
+			const startCoordinate = new Coordinate(0, 1);
+			const rover = new Rover(defaultDirection, startCoordinate, mars);
 
-			rover.executeCommands(['B', 'B']);
+			rover.executeCommands(['F']);
 
-			expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(0, 2), neptune));
+			expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(0, 0), mars));
 		});
+
 	});
 
 	describe('be able to turn', () => {
