@@ -8,10 +8,14 @@ export class Planet {
 	) {}
 
 	joinEdge(coordinate: Coordinate): Coordinate {
-		return new Coordinate(coordinate.x, this.joinEdgeY(coordinate.y));
+		return new Coordinate(this.joinEdgeX(coordinate.x), this.joinEdgeY(coordinate.y));
 	}
 
 	private joinEdgeY(y: number): number {
 		return (y + this.height) % this.height;
+	}
+
+	private joinEdgeX(x: number): number {
+		return (x + this.width) % this.width;
 	}
 }
