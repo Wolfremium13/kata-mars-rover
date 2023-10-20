@@ -1,5 +1,6 @@
 import { Coordinate } from './coordinate';
 import { Direction } from './direction';
+import { MoveForward } from './movements/forward';
 import { Planet } from './planet';
 
 type Command = 'F';
@@ -11,8 +12,8 @@ export class Rover {
 	) {}
 
 	executeCommands(commands: Command[]) {
-        if (commands.includes('F')) {
-            this.coordinate = new Coordinate(0, 1);
-        }
+        commands.forEach((command) => {
+            this.coordinate = new MoveForward().move(this.coordinate, this.planet);
+        });
     }
 }
