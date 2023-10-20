@@ -12,7 +12,8 @@ export class MoveBackward implements Movement {
 			E: () => this.moveEast(currentPosition),
 			W: () => this.moveWest(currentPosition),
 		};
-		return mapDirectionToMovement[this.direction.getCode()]();
+		const newPosition = mapDirectionToMovement[this.direction.getCode()]();
+		return planet.joinEdge(newPosition);
 	}
 
 	private moveNorth(currentPosition: Coordinate): Coordinate {
