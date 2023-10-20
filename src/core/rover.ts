@@ -21,11 +21,11 @@ export class Rover {
 	}
 	
 	private moveForward() {
-		this.coordinate = new MoveForward().move(this.coordinate, this.planet);
+		this.coordinate = new MoveForward(this.direction).move(this.coordinate, this.planet);
 	}
 	
 	private moveBackward() {
-		this.coordinate = new MoveBackward().move(this.coordinate, this.planet);
+		this.coordinate = new MoveBackward(this.direction).move(this.coordinate, this.planet);
 	}
 	
 	private turnLeft() {

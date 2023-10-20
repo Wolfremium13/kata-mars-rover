@@ -1,4 +1,4 @@
-import { Direction } from './direction';
+import { Direction, DirectionCode } from './direction';
 import { North } from './north';
 import { South } from './south';
 
@@ -8,5 +8,8 @@ export class West implements Direction {
 	}
 	whatIsRight() {
 		return new North();
+	}
+	getCode(): DirectionCode {
+		return 'W';
 	}
 }
