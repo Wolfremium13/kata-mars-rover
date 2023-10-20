@@ -34,14 +34,24 @@ describe('Rover should', () => {
 			expect(rover).toMatchObject(new Rover(defaultDirection, new Coordinate(0, 0), mars));
 		});
 
-        it('backward twice', () => {
-            const neptune = new Planet(5, 5);
-            const startCoordinate = new Coordinate(0, 4);
-            const rover = new Rover(defaultDirection, startCoordinate, neptune);
+		it('backward twice', () => {
+			const neptune = new Planet(5, 5);
+			const startCoordinate = new Coordinate(0, 4);
+			const rover = new Rover(defaultDirection, startCoordinate, neptune);
 
-            rover.executeCommands(['B', 'B']);
+			rover.executeCommands(['B', 'B']);
 
-            expect(rover).toMatchObject(new Rover(defaultDirection, new Coordinate(0, 2), neptune));
-        });
+			expect(rover).toMatchObject(new Rover(defaultDirection, new Coordinate(0, 2), neptune));
+		});
+	});
+
+	describe('be able to turn', () => {
+		it('left', () => {
+			const rover = new Rover(Direction.NORTH, defaultCoordinate, mars);
+
+			rover.executeCommands(['L']);
+
+			expect(rover).toMatchObject(new Rover(Direction.WEST, defaultCoordinate, mars));
+		});
 	});
 });
