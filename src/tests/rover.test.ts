@@ -5,43 +5,33 @@ import { Planet } from '../core/planet';
 import { Rover } from '../core/rover';
 
 describe('Rover should', () => {
-	describe('move', () => {
+	const mars = new Planet(2, 2);
+	const defaultDirection = Direction.NORTH;
+	const defaultCoordinate = new Coordinate(0, 0);
+
+	describe('be able to move', () => {
 		it('forward', () => {
-			const startDirection = Direction.NORTH;
-            const startCoordinate = new Coordinate(0, 0);
-            const mars = new Planet(2, 2);
-            const rover = new Rover(startDirection, startCoordinate, mars);
+			const rover = new Rover(defaultDirection, defaultCoordinate, mars);
 
-            rover.executeCommands(['F']);
+			rover.executeCommands(['F']);
 
-            expect(rover).toMatchObject(
-                new Rover(startDirection, new Coordinate(0, 1), mars)
-            );
+			expect(rover).toMatchObject(new Rover(defaultDirection, new Coordinate(0, 1), mars));
 		});
-        it('forward twice', () => {
-            const startDirection = Direction.NORTH;
-            const startCoordinate = new Coordinate(0, 0);
-            const mars = new Planet(2, 2);
-            const rover = new Rover(startDirection, startCoordinate, mars);
+		it('forward twice', () => {
+			const rover = new Rover(defaultDirection, defaultCoordinate, mars);
 
-            rover.executeCommands(['F', 'F']);
+			rover.executeCommands(['F', 'F']);
 
-            expect(rover).toMatchObject(
-                new Rover(startDirection, new Coordinate(0, 2), mars)
-            );
-        });
+			expect(rover).toMatchObject(new Rover(defaultDirection, new Coordinate(0, 2), mars));
+		});
 
-        it('backward', () => {
-            const startDirection = Direction.NORTH;
-            const startCoordinate = new Coordinate(0, 1);
-            const mars = new Planet(2, 2);
-            const rover = new Rover(startDirection, startCoordinate, mars);
+		it('backward', () => {
+			const startCoordinate = new Coordinate(0, 1);
+			const rover = new Rover(defaultDirection, startCoordinate, mars);
 
-            rover.executeCommands(['B']);
+			rover.executeCommands(['B']);
 
-            expect(rover).toMatchObject(
-                new Rover(startDirection, new Coordinate(0, 0), mars)
-            );
-        });
+			expect(rover).toMatchObject(new Rover(defaultDirection, new Coordinate(0, 0), mars));
+		});
 	});
 });
