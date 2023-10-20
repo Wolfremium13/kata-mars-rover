@@ -25,11 +25,15 @@ export class Rover {
 		if(this.planet.hasObstacleAt(nextCoordinate)) {
 			return;
 		}
-		this.coordinate = new MoveForward(this.direction).move(this.coordinate, this.planet);
+		this.coordinate = nextCoordinate;
 	}
 	
 	private moveBackward() {
-		this.coordinate = new MoveBackward(this.direction).move(this.coordinate, this.planet);
+		const nextCoordinate = new MoveBackward(this.direction).move(this.coordinate, this.planet);
+		if(this.planet.hasObstacleAt(nextCoordinate)) {
+			return;
+		}
+		this.coordinate = nextCoordinate;
 	}
 	
 	private turnLeft() {
