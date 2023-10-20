@@ -33,5 +33,15 @@ describe('Rover should', () => {
 
 			expect(rover).toMatchObject(new Rover(defaultDirection, new Coordinate(0, 0), mars));
 		});
+
+        it('backward twice', () => {
+            const neptune = new Planet(5, 5);
+            const startCoordinate = new Coordinate(0, 4);
+            const rover = new Rover(defaultDirection, startCoordinate, neptune);
+
+            rover.executeCommands(['B', 'B']);
+
+            expect(rover).toMatchObject(new Rover(defaultDirection, new Coordinate(0, 2), neptune));
+        });
 	});
 });
