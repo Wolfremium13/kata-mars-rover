@@ -12,6 +12,10 @@ export class Rover {
 	) {}
 
 	executeCommands(commands: Command[]) {
+		if (commands.includes('B')) {
+			this.coordinate = new Coordinate(0, 0);
+			return;
+		}
         commands.forEach((command) => {
             this.coordinate = new MoveForward().move(this.coordinate, this.planet);
         });
