@@ -5,4 +5,7 @@ export class West implements Direction {
 	whatIsLeft() {
 		return new South();
 	}
+	whatIsRight() {
+		return this;
+	}
 }

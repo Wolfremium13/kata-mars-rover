@@ -14,21 +14,24 @@ export class Rover {
 				F: () => this.moveForward(),
 				B: () => this.moveBackward(),
 				L: () => this.turnLeft(),
-				R: () => {},
+				R: () => this.turnRight(),
 			};
 			commandMap[command]();
 		});
 	}
-
+	
 	private moveForward() {
 		this.coordinate = new MoveForward().move(this.coordinate, this.planet);
 	}
-
+	
 	private moveBackward() {
 		this.coordinate = new MoveBackward().move(this.coordinate, this.planet);
 	}
-
+	
 	private turnLeft() {
 		this.direction = this.direction.whatIsLeft();
+	}
+	private turnRight() {
+		this.direction = this.direction.whatIsRight();
 	}
 }

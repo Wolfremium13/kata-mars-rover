@@ -4,4 +4,7 @@ export class South implements Direction {
 	whatIsLeft() {
 		return this;
 	}
+	whatIsRight() {
+		return this;
+	}
 }

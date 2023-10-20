@@ -4,4 +4,7 @@ export class East implements Direction {
     whatIsLeft() {
         return this;
     }
+    whatIsRight() {
+        return this;
+    }
 }
