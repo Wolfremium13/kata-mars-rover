@@ -3,10 +3,13 @@ import { Direction } from '../core/direction';
 import { Coordinate } from '../core/coordinate';
 import { Planet } from '../core/planet';
 import { Rover } from '../core/rover';
+import { North } from '../core/directions/north';
+import { West } from '../core/directions/west';
+import { South } from '../core/directions/south';
 
 describe('Rover should', () => {
 	const mars = new Planet(2, 2);
-	const defaultDirection = Direction.NORTH;
+	const defaultDirection = new North();
 	const defaultCoordinate = new Coordinate(0, 0);
 
 	describe('be able to move', () => {
@@ -47,18 +50,18 @@ describe('Rover should', () => {
 
 	describe('be able to turn', () => {
 		it('left', () => {
-			const rover = new Rover(Direction.NORTH, defaultCoordinate, mars);
+			const rover = new Rover(defaultDirection, defaultCoordinate, mars);
 
 			rover.executeCommands(['L']);
 
-			expect(rover).toMatchObject(new Rover(Direction.WEST, defaultCoordinate, mars));
+			expect(rover).toMatchObject(new Rover(new West(), defaultCoordinate, mars));
 		});
         it('left twice', () => {
-            const rover = new Rover(Direction.NORTH, defaultCoordinate, mars);
+            const rover = new Rover(defaultDirection, defaultCoordinate, mars);
 
             rover.executeCommands(['L', 'L']);
 
-            expect(rover).toMatchObject(new Rover(Direction.SOUTH, defaultCoordinate, mars));
+            expect(rover).toMatchObject(new Rover(new South(), defaultCoordinate, mars));
         });
 	});
 });

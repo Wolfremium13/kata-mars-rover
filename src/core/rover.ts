@@ -1,5 +1,5 @@
 import { Coordinate } from './coordinate';
-import { Direction } from './direction';
+import { Direction } from './directions/direction';
 import { MoveBackward } from './movements/backward';
 import { MoveForward } from './movements/forward';
 import { Planet } from './planet';
@@ -13,7 +13,7 @@ export class Rover {
 			const commandMap = {
 				F: () => this.moveForward(),
 				B: () => this.moveBackward(),
-				L: () => {this.direction = Direction.WEST},
+				L: () => this.turnLeft(),
 			};
 			commandMap[command]();
 		});
@@ -25,5 +25,9 @@ export class Rover {
 
 	private moveBackward() {
 		this.coordinate = new MoveBackward().move(this.coordinate, this.planet);
+	}
+
+	private turnLeft() {
+		this.direction = this.direction.whatIsLeft();
 	}
 }
