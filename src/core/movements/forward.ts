@@ -7,12 +7,13 @@ export class MoveForward implements Movement {
 	constructor(private readonly direction: Direction) {}
 	move(currentPosition: Coordinate, planet: Planet): Coordinate {
 		const mapDirectionToMovement = {
-			'N': () => this.moveNorth(currentPosition),
-			'S': () => this.moveSouth(currentPosition),
-			'E': () => this.moveEast(currentPosition),
-			'W': () => this.moveWest(currentPosition),
+			N: () => this.moveNorth(currentPosition),
+			S: () => this.moveSouth(currentPosition),
+			E: () => this.moveEast(currentPosition),
+			W: () => this.moveWest(currentPosition),
 		};
-		return mapDirectionToMovement[this.direction.getCode()]();
+		const position = mapDirectionToMovement[this.direction.getCode()]();
+		return planet.joinEdge(position);
 	}
 
 	private moveNorth(currentPosition: Coordinate) {
