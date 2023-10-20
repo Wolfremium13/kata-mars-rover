@@ -39,4 +39,23 @@ describe('Planet should', () => {
 			expect(coordinate).toStrictEqual(new Coordinate(1, 0));
 		});
 	});
+
+	describe('be able to check if there is an obstacle', () => {
+		const obstacle = new Coordinate(0, 1);
+		it('when there is', () => {
+			const planet = new Planet(2, 2, [obstacle]);
+
+			const isObstacle = planet.hasObstacleAt(obstacle);
+
+			expect(isObstacle).toBe(true);
+		});
+
+		it('when there is not', () => {
+			const planet = new Planet(2, 2, [obstacle]);
+
+			const isObstacle = planet.hasObstacleAt(new Coordinate(0, 0));
+
+			expect(isObstacle).toBe(false);
+		});
+	})
 });
