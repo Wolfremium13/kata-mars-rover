@@ -93,5 +93,12 @@ describe('Rover should', () => {
 
 			expect(rover).toStrictEqual(new Rover(defaultDirection, defaultCoordinate, planetWithObstacle));
 		})
+		it('when moving backward', () => {
+			const rover = new Rover(defaultDirection, new Coordinate(0, 2), planetWithObstacle);
+
+			rover.executeCommands(['B']);
+
+			expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(0, 2), planetWithObstacle));
+		})
 	});
 });
