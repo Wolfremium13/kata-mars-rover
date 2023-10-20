@@ -1,4 +1,5 @@
 import { Direction } from './direction';
+import { North } from './north';
 import { South } from './south';
 
 export class West implements Direction {
@@ -6,6 +7,6 @@ export class West implements Direction {
 		return new South();
 	}
 	whatIsRight() {
-		return this;
+		return new North();
 	}
 }

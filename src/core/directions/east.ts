@@ -1,10 +1,12 @@
 import { Direction } from "./direction";
+import { North } from "./north";
+import { South } from "./south";
 
 export class East implements Direction {
     whatIsLeft() {
-        return this;
+        return new North();
     }
     whatIsRight() {
-        return this;
+        return new South();
     }
 }
