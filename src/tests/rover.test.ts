@@ -46,7 +46,6 @@ describe('Rover should', () => {
 
 			expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(0, 1), mars));
 		});
-
 	});
 
 	describe('be able to turn', () => {
@@ -82,5 +81,17 @@ describe('Rover should', () => {
 
 			expect(rover).toStrictEqual(new Rover(defaultDirection, defaultCoordinate, mars));
 		});
+	});
+
+	describe('crash with obstacles that are in the way', () => {
+		const obstacle = new Coordinate(0, 1);
+		const planetWithObstacle = new Planet(2, 2, [obstacle]);
+		it('when moving forward', () => {
+			const rover = new Rover(defaultDirection, defaultCoordinate, planetWithObstacle);
+
+			expect(() => {
+				rover.executeCommands(["F"]);
+			}).toThrowError(`Obstacle found at (${obstacle.x}, ${obstacle.y})`);
+		})
 	});
 });
