@@ -21,6 +21,10 @@ export class Rover {
 	}
 	
 	private moveForward() {
+		const nextCoordinate = new MoveForward(this.direction).move(this.coordinate, this.planet);
+		if(this.planet.hasObstacleAt(nextCoordinate)) {
+			return;
+		}
 		this.coordinate = new MoveForward(this.direction).move(this.coordinate, this.planet);
 	}
 	

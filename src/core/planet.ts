@@ -7,6 +7,10 @@ export class Planet {
 		private readonly obstacles: Coordinate[] = []
 	) {}
 
+	hasObstacleAt(coordinate: Coordinate): boolean {
+		return this.obstacles.some((obstacle) => obstacle.equals(coordinate));
+	}
+
 	joinEdge(coordinate: Coordinate): Coordinate {
 		return new Coordinate(this.joinEdgeX(coordinate.x), this.joinEdgeY(coordinate.y));
 	}
