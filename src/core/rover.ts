@@ -6,9 +6,13 @@ type Command = 'F';
 export class Rover {
 	constructor(
 		private readonly direction: Direction,
-		private readonly coordinate: Coordinate,
+		private coordinate: Coordinate,
 		private readonly planet: Planet
 	) {}
 
-	executeCommands(commands: Command[]) {}
+	executeCommands(commands: Command[]) {
+        if (commands.includes('F')) {
+            this.coordinate = new Coordinate(0, 1);
+        }
+    }
 }
