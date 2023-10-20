@@ -30,13 +30,21 @@ describe('Rover should', () => {
 			expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(0, 0), mars));
 		});
 
-		it('passing the edge of the planet', () => {
+		it('forward passing the edge of the planet', () => {
 			const startCoordinate = new Coordinate(0, 1);
 			const rover = new Rover(defaultDirection, startCoordinate, mars);
 
 			rover.executeCommands(['F']);
 
 			expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(0, 0), mars));
+		});
+
+		it('backward passing the edge of the planet', () => {
+			const rover = new Rover(defaultDirection, defaultCoordinate, mars);
+
+			rover.executeCommands(['B']);
+
+			expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(0, 1), mars));
 		});
 
 	});
