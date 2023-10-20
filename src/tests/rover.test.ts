@@ -57,15 +57,6 @@ describe('Rover should', () => {
 			const expectedDirection = new West();
 			expect(rover).toStrictEqual(new Rover(expectedDirection, defaultCoordinate, mars));
 		});
-		it('left twice', () => {
-			const rover = new Rover(defaultDirection, defaultCoordinate, mars);
-
-			rover.executeCommands(['L', 'L']);
-
-			const expectedDirection = new South();
-			expect(rover).toStrictEqual(new Rover(expectedDirection, defaultCoordinate, mars));
-		});
-
 		it('right', () => {
 			const rover = new Rover(defaultDirection, defaultCoordinate, mars);
 
@@ -73,6 +64,22 @@ describe('Rover should', () => {
 
 			const expectedDirection = new East();
 			expect(rover).toStrictEqual(new Rover(expectedDirection, defaultCoordinate, mars));
+		});
+		it('around', () => {
+			const rover = new Rover(defaultDirection, defaultCoordinate, mars);
+
+			rover.executeCommands(['R', 'R']);
+
+			const expectedDirection = new South();
+			expect(rover).toStrictEqual(new Rover(expectedDirection, defaultCoordinate, mars));
+		});
+
+		it('around in a circle', () => {
+			const rover = new Rover(defaultDirection, defaultCoordinate, mars);
+
+			rover.executeCommands(['R', 'R', 'R', 'R']);
+
+			expect(rover).toStrictEqual(new Rover(defaultDirection, defaultCoordinate, mars));
 		});
 	});
 });
