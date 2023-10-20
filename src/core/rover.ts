@@ -4,15 +4,16 @@ import { MoveBackward } from './movements/backward';
 import { MoveForward } from './movements/forward';
 import { Planet } from './planet';
 
-type Command = 'F' | 'B';
+type Command = 'F' | 'B' | 'L';
 export class Rover {
-	constructor(private readonly direction: Direction, private coordinate: Coordinate, private readonly planet: Planet) {}
+	constructor(private direction: Direction, private coordinate: Coordinate, private readonly planet: Planet) {}
 
 	executeCommands(commands: Command[]) {
 		commands.forEach((command) => {
 			const commandMap = {
 				F: () => this.moveForward(),
 				B: () => this.moveBackward(),
+				L: () => {this.direction = Direction.WEST},
 			};
 			commandMap[command]();
 		});
