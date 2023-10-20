@@ -4,7 +4,7 @@ import { MoveBackward } from './movements/backward';
 import { MoveForward } from './movements/forward';
 import { Planet } from './planet';
 
-type Command = 'F' | 'B' | 'L';
+type Command = 'F' | 'B' | 'L' | 'R';
 export class Rover {
 	constructor(private direction: Direction, private coordinate: Coordinate, private readonly planet: Planet) {}
 
@@ -14,6 +14,7 @@ export class Rover {
 				F: () => this.moveForward(),
 				B: () => this.moveBackward(),
 				L: () => this.turnLeft(),
+				R: () => {},
 			};
 			commandMap[command]();
 		});
