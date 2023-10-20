@@ -30,5 +30,18 @@ describe('Rover should', () => {
                 new Rover(startDirection, new Coordinate(0, 2), mars)
             );
         });
+
+        it('backward', () => {
+            const startDirection = Direction.NORTH;
+            const startCoordinate = new Coordinate(0, 1);
+            const mars = new Planet(2, 2);
+            const rover = new Rover(startDirection, startCoordinate, mars);
+
+            rover.executeCommands(['B']);
+
+            expect(rover).toMatchObject(
+                new Rover(startDirection, new Coordinate(0, 0), mars)
+            );
+        });
 	});
 });

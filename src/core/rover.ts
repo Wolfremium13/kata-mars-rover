@@ -3,7 +3,7 @@ import { Direction } from './direction';
 import { MoveForward } from './movements/forward';
 import { Planet } from './planet';
 
-type Command = 'F';
+type Command = 'F' | 'B';
 export class Rover {
 	constructor(
 		private readonly direction: Direction,
