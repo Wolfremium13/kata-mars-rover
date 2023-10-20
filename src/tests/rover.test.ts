@@ -53,5 +53,12 @@ describe('Rover should', () => {
 
 			expect(rover).toMatchObject(new Rover(Direction.WEST, defaultCoordinate, mars));
 		});
+        it('left twice', () => {
+            const rover = new Rover(Direction.NORTH, defaultCoordinate, mars);
+
+            rover.executeCommands(['L', 'L']);
+
+            expect(rover).toMatchObject(new Rover(Direction.SOUTH, defaultCoordinate, mars));
+        });
 	});
 });
