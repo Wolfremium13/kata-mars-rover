@@ -101,4 +101,23 @@ describe('Rover should', () => {
 			expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(0, 2), planetWithObstacle));
 		})
 	});
+
+	describe('be able to border the obstacles', () => {
+		const obstacle = new Coordinate(0, 1);
+		const planetWithObstacle = new Planet(3, 3, [obstacle]);
+		it('when moving forward', () => {
+			const rover = new Rover(defaultDirection, new Coordinate(0, 2), planetWithObstacle);
+
+			rover.executeCommands(['F', 'L', 'F', 'R', 'F']);
+
+			expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(2, 1), planetWithObstacle));
+		})
+		it('when moving backward', () => {
+			const rover = new Rover(defaultDirection, new Coordinate(2, 1), planetWithObstacle);
+
+			rover.executeCommands(['B', 'R', 'B', 'L', 'B']);
+
+			expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(1, 2), planetWithObstacle));
+		})
+	})
 });
