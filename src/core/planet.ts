@@ -32,6 +32,7 @@ export class PlanetHeight {
 	private constructor(private readonly height: number) {}
 
 	static from(value: number): PlanetHeight {
+		// Throw an error maybe is worst than return a minimum value
 		if (value < PlanetHeight.MINIMUM) {
 			return new PlanetHeight(PlanetHeight.MINIMUM);
 		}
@@ -49,6 +50,7 @@ export class PlanetWidth {
 	private constructor(private readonly width: number) {}
 
 	static from(value: number): PlanetWidth {
+		// Throw an error maybe is worst than return a minimum value
 		if (value < PlanetWidth.MINIMUM) {
 			return new PlanetWidth(PlanetWidth.MINIMUM);
 		}
