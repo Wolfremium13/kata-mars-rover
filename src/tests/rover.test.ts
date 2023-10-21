@@ -1,86 +1,82 @@
 import { describe, it, expect } from 'vitest';
 import { Coordinate } from '../core/coordinate';
-import { Planet } from '../core/planet';
-import { Rover } from '../core/rover';
-import { North } from '../core/directions/north';
 import { South } from '../core/directions/south';
+import { PlanetBuilder } from './builders/planet.builder';
+import { RoverBuilder } from './builders/rover.builder';
 
 describe('Rover should', () => {
-	const mars = new Planet(2, 2);
-	const defaultDirection = new North();
-	const defaultCoordinate = new Coordinate(0, 0);
-
 	describe('be able to move', () => {
+		const obstacle = new Coordinate(0, 1);
+		const planetWithObstacle = new PlanetBuilder().withHeight(3).withWidth(3).withObstacles([obstacle]).build();
 		describe('not surpassing obstacles that are in the way', () => {
-			const obstacle = new Coordinate(0, 1);
-			const planetWithObstacle = new Planet(2, 2, [obstacle]);
 			it('when moving forward', () => {
-				const rover = new Rover(defaultDirection, defaultCoordinate, planetWithObstacle);
+				const rover = new RoverBuilder().withPlanet(planetWithObstacle).build();
 
 				rover.executeCommands(['F']);
 
-				expect(rover).toStrictEqual(new Rover(defaultDirection, defaultCoordinate, planetWithObstacle));
+				expect(rover).toStrictEqual(new RoverBuilder().withPlanet(planetWithObstacle).build());
 			});
 			it('when moving backward', () => {
-				const rover = new Rover(defaultDirection, new Coordinate(0, 2), planetWithObstacle);
+				const rover = new RoverBuilder().withPlanet(planetWithObstacle).withCoordinate(new Coordinate(0, 2)).build();
 
 				rover.executeCommands(['B']);
 
-				expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(0, 2), planetWithObstacle));
+				expect(rover).toStrictEqual(
+					new RoverBuilder().withPlanet(planetWithObstacle).withCoordinate(new Coordinate(0, 2)).build()
+				);
 			});
 		});
 		describe('and border the obstacles', () => {
-			const obstacle = new Coordinate(0, 1);
-			const planetWithObstacle = new Planet(3, 3, [obstacle]);
 			it('when moving forward', () => {
-				const rover = new Rover(defaultDirection, new Coordinate(0, 2), planetWithObstacle);
+				const rover = new RoverBuilder().withCoordinate(new Coordinate(1, 0)).withPlanet(planetWithObstacle).build();
 
 				rover.executeCommands(['F', 'L', 'F', 'R', 'F']);
 
-				expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(2, 1), planetWithObstacle));
+				expect(rover).toStrictEqual(
+					new RoverBuilder().withCoordinate(new Coordinate(1, 2)).withPlanet(planetWithObstacle).build()
+				);
 			});
 			it('when moving backward', () => {
-				const rover = new Rover(defaultDirection, new Coordinate(2, 1), planetWithObstacle);
+				const rover = new RoverBuilder().withCoordinate(new Coordinate(1, 2)).withPlanet(planetWithObstacle).build();
 
 				rover.executeCommands(['B', 'R', 'B', 'L', 'B']);
 
-				expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(1, 2), planetWithObstacle));
+				expect(rover).toStrictEqual(new RoverBuilder().withCoordinate(new Coordinate(1,0)).withPlanet(planetWithObstacle).build());
 			});
 		});
 		describe('and turn around the planet', () => {
 			it('when moving forward', () => {
-				const rover = new Rover(defaultDirection, new Coordinate(0, 2), mars);
+				const rover = new RoverBuilder().withCoordinate(new Coordinate(0, 0)).build();
 
 				rover.executeCommands(['F', 'F']);
 
-				expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(0, 0), mars));
+				expect(rover).toStrictEqual(new RoverBuilder().withCoordinate(new Coordinate(0, 0)).build());
 			});
 			it('when moving backward', () => {
-				const rover = new Rover(defaultDirection, new Coordinate(0, 0), mars);
+				const rover = new RoverBuilder().build();
 
 				rover.executeCommands(['B']);
 
-				expect(rover).toStrictEqual(new Rover(defaultDirection, new Coordinate(0, 1), mars));
+				expect(rover).toStrictEqual(new RoverBuilder().withCoordinate(new Coordinate(0, 1)).build());
 			});
 		});
 	});
 
 	describe('be able to turn', () => {
 		it('around', () => {
-			const rover = new Rover(defaultDirection, defaultCoordinate, mars);
+			const rover = new RoverBuilder().build();
 
 			rover.executeCommands(['R', 'R']);
 
 			const expectedDirection = new South();
-			expect(rover).toStrictEqual(new Rover(expectedDirection, defaultCoordinate, mars));
+			expect(rover).toStrictEqual(new RoverBuilder().withDirection(expectedDirection).build());
 		});
 
 		it('around in a circle', () => {
-			const rover = new Rover(defaultDirection, defaultCoordinate, mars);
-
+			const rover = new RoverBuilder().build();
 			rover.executeCommands(['R', 'R', 'R', 'R']);
 
-			expect(rover).toStrictEqual(new Rover(defaultDirection, defaultCoordinate, mars));
+			expect(rover).toStrictEqual(new RoverBuilder().build());
 		});
 	});
 });
