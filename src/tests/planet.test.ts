@@ -56,7 +56,7 @@ describe('Planet should', () => {
 
 			const isObstacle = planetWithAnObstacle.hasObstacleAt(nonObstaclePosition);
 
-			expect(isObstacle).toBe(false);
+			expect(isObstacle).toBeFalsy();
 		});
 	});
 
