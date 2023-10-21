@@ -2,15 +2,15 @@ import { describe, it, expect } from 'vitest';
 import { North } from '../core/directions/north';
 import { Coordinate } from '../core/coordinate';
 import { MoveForward } from '../core/movements/forward';
-import { Planet } from '../core/planet';
 import { South } from '../core/directions/south';
 import { West } from '../core/directions/west';
 import { East } from '../core/directions/east';
 import { MoveBackward } from '../core/movements/backward';
+import { PlanetBuilder } from './builders/planet.builder';
 
 describe('Movements should', () => {
 	describe('be able to move', () => {
-		const planet = new Planet(10, 10);
+		const planetWithoutObstacles = new PlanetBuilder().withHeight(10).withWidth(10).build();
 		describe('forward', () => {
 			const startPosition = new Coordinate(5, 5);
 			it('when facing north', () => {
@@ -18,7 +18,7 @@ describe('Movements should', () => {
 				const movement = new MoveForward(direction);
 
 				const expectedCoordinate = new Coordinate(5, 6);
-				expect(movement.move(startPosition, planet)).toStrictEqual(expectedCoordinate);
+				expect(movement.move(startPosition, planetWithoutObstacles)).toStrictEqual(expectedCoordinate);
 			});
 
 			it('when facing south', () => {
@@ -26,7 +26,7 @@ describe('Movements should', () => {
 				const movement = new MoveForward(direction);
 
 				const expectedCoordinate = new Coordinate(5, 4);
-				expect(movement.move(startPosition, planet)).toStrictEqual(expectedCoordinate);
+				expect(movement.move(startPosition, planetWithoutObstacles)).toStrictEqual(expectedCoordinate);
 			});
 
 			it('when facing east', () => {
@@ -34,7 +34,7 @@ describe('Movements should', () => {
 				const movement = new MoveForward(direction);
 
 				const expectedCoordinate = new Coordinate(6, 5);
-				expect(movement.move(startPosition, planet)).toStrictEqual(expectedCoordinate);
+				expect(movement.move(startPosition, planetWithoutObstacles)).toStrictEqual(expectedCoordinate);
 			});
 
 			it('when facing west', () => {
@@ -42,7 +42,7 @@ describe('Movements should', () => {
 				const movement = new MoveForward(direction);
 
 				const expectedCoordinate = new Coordinate(4, 5);
-				expect(movement.move(startPosition, planet)).toStrictEqual(expectedCoordinate);
+				expect(movement.move(startPosition, planetWithoutObstacles)).toStrictEqual(expectedCoordinate);
 			});
 		});
 
@@ -53,7 +53,7 @@ describe('Movements should', () => {
 				const movement = new MoveBackward(direction);
 
 				const expectedCoordinate = new Coordinate(5, 4);
-				expect(movement.move(startPosition, planet)).toStrictEqual(expectedCoordinate);
+				expect(movement.move(startPosition, planetWithoutObstacles)).toStrictEqual(expectedCoordinate);
 			});
 
 			it('when facing south', () => {
@@ -61,7 +61,7 @@ describe('Movements should', () => {
 				const movement = new MoveBackward(direction);
 
 				const expectedCoordinate = new Coordinate(5, 6);
-				expect(movement.move(startPosition, planet)).toStrictEqual(expectedCoordinate);
+				expect(movement.move(startPosition, planetWithoutObstacles)).toStrictEqual(expectedCoordinate);
 			});
 
 			it('when facing east', () => {
@@ -69,7 +69,7 @@ describe('Movements should', () => {
 				const movement = new MoveBackward(direction);
 
 				const expectedCoordinate = new Coordinate(4, 5);
-				expect(movement.move(startPosition, planet)).toStrictEqual(expectedCoordinate);
+				expect(movement.move(startPosition, planetWithoutObstacles)).toStrictEqual(expectedCoordinate);
 			});
 
 			it('when facing west', () => {
@@ -77,7 +77,7 @@ describe('Movements should', () => {
 				const movement = new MoveBackward(direction);
 
 				const expectedCoordinate = new Coordinate(6, 5);
-				expect(movement.move(startPosition, planet)).toStrictEqual(expectedCoordinate);
+				expect(movement.move(startPosition, planetWithoutObstacles)).toStrictEqual(expectedCoordinate);
 			});
 		});
 	});
