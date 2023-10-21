@@ -62,21 +62,24 @@ describe('Rover should', () => {
 			});
 		});
 		describe('be able to keep the same direction', () => {
+			const bigPlainPlanet = new PlanetBuilder().withHeight(10).withWidth(10).build();
 			it('when moving forward', () => {
-				const rover = new RoverBuilder().build();
+				const rover = new RoverBuilder().withPlanet(bigPlainPlanet).build();
 
 				rover.executeCommands(['F', 'F', 'F', 'F']);
 
 				const expectedDirection = new North();
-				expect(rover).toStrictEqual(new RoverBuilder().withDirection(expectedDirection).build());
+				expect(rover).toStrictEqual(new RoverBuilder().withPlanet(bigPlainPlanet).withDirection(expectedDirection).withCoordinate(
+					new Coordinate(0, 4)
+					).build());
 			});
 			it('when moving backward', () => {
-				const rover = new RoverBuilder().build();
+				const rover = new RoverBuilder().withCoordinate(new Coordinate(0,4)).withPlanet(bigPlainPlanet).build();
 
 				rover.executeCommands(['B', 'B', 'B', 'B']);
 
 				const expectedDirection = new North();
-				expect(rover).toStrictEqual(new RoverBuilder().withDirection(expectedDirection).build());
+				expect(rover).toStrictEqual(new RoverBuilder().withPlanet(bigPlainPlanet).withDirection(expectedDirection).build());
 			});
 		});
 	});

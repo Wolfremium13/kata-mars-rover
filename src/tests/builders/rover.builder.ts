@@ -3,9 +3,10 @@ import { Planet } from '../../core/planet';
 import { North } from '../../core/directions/north';
 import { Rover } from '../../core/rover';
 import { Direction } from '../../core/directions/direction';
+import { PlanetBuilder } from './planet.builder';
 
 export class RoverBuilder {
-	private planet: Planet = new Planet(2, 2);
+	private planet: Planet = new PlanetBuilder().withHeight(2).withWidth(2).build();
 	private direction: Direction = new North();
 	private coordinate: Coordinate = new Coordinate(0, 0);
 

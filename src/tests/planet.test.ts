@@ -59,4 +59,17 @@ describe('Planet should', () => {
 			expect(isObstacle).toBe(false);
 		});
 	});
+
+	describe('have a minimum size', () => {
+		it('ignoring negatives', () => {
+			const planet = new PlanetBuilder().withHeight(-1).withWidth(-1).build();
+
+			expect(planet).toStrictEqual(new PlanetBuilder().withHeight(1).withWidth(1).build());
+		});
+		it('ignoring zeros', () => {
+			const planet = new PlanetBuilder().withHeight(0).withWidth(0).build();
+
+			expect(planet).toStrictEqual(new PlanetBuilder().withHeight(1).withWidth(1).build());
+		});
+	});
 });

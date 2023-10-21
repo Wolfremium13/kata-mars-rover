@@ -1,17 +1,17 @@
 import { Coordinate } from '../../core/coordinate';
-import { Planet } from '../../core/planet';
+import { Planet, PlanetHeight, PlanetWidth } from '../../core/planet';
 
 export class PlanetBuilder {
-	private width = 2;
-	private height = 2;
+	private width: PlanetWidth = PlanetWidth.from(2);
+	private height: PlanetHeight = PlanetHeight.from(2);
 	private obstacles: Coordinate[] = [];
 
 	withWidth(width: number) {
-		this.width = width;
+		this.width = PlanetWidth.from(width);
 		return this;
 	}
 	withHeight(height: number) {
-		this.height = height;
+		this.height = PlanetHeight.from(height);
 		return this;
 	}
 
