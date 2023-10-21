@@ -3,6 +3,7 @@ import { Coordinate } from '../core/coordinate';
 import { South } from '../core/directions/south';
 import { PlanetBuilder } from './builders/planet.builder';
 import { RoverBuilder } from './builders/rover.builder';
+import { North } from '../core/directions/north';
 
 describe('Rover should', () => {
 	describe('be able to move', () => {
@@ -60,7 +61,26 @@ describe('Rover should', () => {
 				expect(rover).toStrictEqual(new RoverBuilder().withCoordinate(new Coordinate(0, 1)).build());
 			});
 		});
+		describe('be able to keep the same direction', () => {
+			it('when moving forward', () => {
+				const rover = new RoverBuilder().build();
+
+				rover.executeCommands(['F', 'F', 'F', 'F']);
+
+				const expectedDirection = new North();
+				expect(rover).toStrictEqual(new RoverBuilder().withDirection(expectedDirection).build());
+			});
+			it('when moving backward', () => {
+				const rover = new RoverBuilder().build();
+
+				rover.executeCommands(['B', 'B', 'B', 'B']);
+
+				const expectedDirection = new North();
+				expect(rover).toStrictEqual(new RoverBuilder().withDirection(expectedDirection).build());
+			});
+		});
 	});
+
 
 	describe('be able to turn', () => {
 		it('around', () => {
