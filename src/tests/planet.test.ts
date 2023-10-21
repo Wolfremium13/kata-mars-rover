@@ -1,40 +1,42 @@
 import { describe, it, expect } from 'vitest';
-import { Planet } from '../core/planet';
 import { Coordinate } from '../core/coordinate';
+import { PlanetBuilder } from './builders/planet.builder';
 
 describe('Planet should', () => {
-	const planet = new Planet(2, 2);
+	const planetHeight = 2;
+	const planetWidth = 2;
+	const planetWithoutObstacles = new PlanetBuilder().withHeight(planetHeight).withWidth(planetWidth).build();
 	describe('be able to join the positive edges', () => {
-		it('on X', () => {
-			const startCoordinate = new Coordinate(0, 2);
+		it('on Y', () => {
+			const heighEdgeOfThePlanet = new Coordinate(0, planetHeight);
 
-			const coordinate = planet.joinEdge(startCoordinate);
+			const coordinate = planetWithoutObstacles.joinEdge(heighEdgeOfThePlanet);
 
 			expect(coordinate).toStrictEqual(new Coordinate(0, 0));
 		});
 
-		it('on Y', () => {
-			const startCoordinate = new Coordinate(2, 0);
+		it('on X', () => {
+			const withEdgeOfThePlanet = new Coordinate(planetWidth, 0);
 
-			const coordinate = planet.joinEdge(startCoordinate);
+			const coordinate = planetWithoutObstacles.joinEdge(withEdgeOfThePlanet);
 
 			expect(coordinate).toStrictEqual(new Coordinate(0, 0));
 		});
 	});
 
 	describe('be able to join the negative edges', () => {
-		it('on X', () => {
-			const startCoordinate = new Coordinate(0, -1);
+		it('on Y', () => {
+			const heighEdgeOfThePlanet = new Coordinate(0, -1);
 
-			const coordinate = planet.joinEdge(startCoordinate);
+			const coordinate = planetWithoutObstacles.joinEdge(heighEdgeOfThePlanet);
 
 			expect(coordinate).toStrictEqual(new Coordinate(0, 1));
 		});
 
-		it('on Y', () => {
-			const startCoordinate = new Coordinate(-1, 0);
+		it('on X', () => {
+			const withEdgeOfThePlanet = new Coordinate(-1, 0);
 
-			const coordinate = planet.joinEdge(startCoordinate);
+			const coordinate = planetWithoutObstacles.joinEdge(withEdgeOfThePlanet);
 
 			expect(coordinate).toStrictEqual(new Coordinate(1, 0));
 		});
@@ -42,20 +44,19 @@ describe('Planet should', () => {
 
 	describe('be able to check if there is an obstacle', () => {
 		const obstacle = new Coordinate(0, 1);
+		const planetWithAnObstacle = new PlanetBuilder().withObstacles([obstacle]).build();
 		it('when there is', () => {
-			const planet = new Planet(2, 2, [obstacle]);
+			const isObstacle = planetWithAnObstacle.hasObstacleAt(obstacle);
 
-			const isObstacle = planet.hasObstacleAt(obstacle);
-
-			expect(isObstacle).toBe(true);
+			expect(isObstacle).toBeTruthy();
 		});
 
 		it('when there is not', () => {
-			const planet = new Planet(2, 2, [obstacle]);
+			const nonObstaclePosition = new Coordinate(0, 0);
 
-			const isObstacle = planet.hasObstacleAt(new Coordinate(0, 0));
+			const isObstacle = planetWithAnObstacle.hasObstacleAt(nonObstaclePosition);
 
 			expect(isObstacle).toBe(false);
 		});
-	})
+	});
 });
