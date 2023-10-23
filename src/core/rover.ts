@@ -10,36 +10,41 @@ export class Rover {
 
 	executeCommands(commands: Command[]) {
 		commands.forEach((command) => {
-			const commandMap = {
-				F: () => this.moveForward(),
-				B: () => this.moveBackward(),
-				L: () => this.turnLeft(),
-				R: () => this.turnRight(),
-			};
-			commandMap[command]();
+			this.mapCommand(command)();
 		});
 	}
-	
+
 	private moveForward() {
 		const nextCoordinate = new MoveForward(this.direction).move(this.coordinate, this.planet);
-		if(this.planet.hasObstacleAt(nextCoordinate)) {
+		if (this.planet.hasObstacleAt(nextCoordinate)) {
 			return;
 		}
 		this.coordinate = nextCoordinate;
 	}
-	
+
 	private moveBackward() {
 		const nextCoordinate = new MoveBackward(this.direction).move(this.coordinate, this.planet);
-		if(this.planet.hasObstacleAt(nextCoordinate)) {
+		if (this.planet.hasObstacleAt(nextCoordinate)) {
 			return;
 		}
 		this.coordinate = nextCoordinate;
 	}
-	
+
 	private turnLeft() {
 		this.direction = this.direction.whatIsLeft();
 	}
 	private turnRight() {
 		this.direction = this.direction.whatIsRight();
+	}
+
+	private mapCommand(command: Command) {
+		// Maybe this could be refactored into a Factory
+		const commandMap = {
+			F: () => this.moveForward(),
+			B: () => this.moveBackward(),
+			L: () => this.turnLeft(),
+			R: () => this.turnRight(),
+		};
+		return commandMap[command];
 	}
 }
