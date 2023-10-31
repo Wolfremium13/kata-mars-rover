@@ -42,7 +42,9 @@ describe('Rover should', () => {
 
 				rover.executeCommands(['B', 'R', 'B', 'L', 'B']);
 
-				expect(rover).toStrictEqual(new RoverBuilder().withCoordinate(new Coordinate(1,0)).withPlanet(planetWithObstacle).build());
+				expect(rover).toStrictEqual(
+					new RoverBuilder().withCoordinate(new Coordinate(1, 0)).withPlanet(planetWithObstacle).build()
+				);
 			});
 		});
 		describe('and turn around the planet', () => {
@@ -69,21 +71,26 @@ describe('Rover should', () => {
 				rover.executeCommands(['F', 'F', 'F', 'F']);
 
 				const expectedDirection = new North();
-				expect(rover).toStrictEqual(new RoverBuilder().withPlanet(bigPlainPlanet).withDirection(expectedDirection).withCoordinate(
-					new Coordinate(0, 4)
-					).build());
+				expect(rover).toStrictEqual(
+					new RoverBuilder()
+						.withPlanet(bigPlainPlanet)
+						.withDirection(expectedDirection)
+						.withCoordinate(new Coordinate(0, 4))
+						.build()
+				);
 			});
 			it('when moving backward', () => {
-				const rover = new RoverBuilder().withCoordinate(new Coordinate(0,4)).withPlanet(bigPlainPlanet).build();
+				const rover = new RoverBuilder().withCoordinate(new Coordinate(0, 4)).withPlanet(bigPlainPlanet).build();
 
 				rover.executeCommands(['B', 'B', 'B', 'B']);
 
 				const expectedDirection = new North();
-				expect(rover).toStrictEqual(new RoverBuilder().withPlanet(bigPlainPlanet).withDirection(expectedDirection).build());
+				expect(rover).toStrictEqual(
+					new RoverBuilder().withPlanet(bigPlainPlanet).withDirection(expectedDirection).build()
+				);
 			});
 		});
 	});
-
 
 	describe('be able to turn', () => {
 		it('around', () => {
