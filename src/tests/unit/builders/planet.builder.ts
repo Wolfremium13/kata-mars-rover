@@ -1,5 +1,5 @@
-import { Coordinate } from '../../core/coordinate';
-import { Planet, PlanetHeight, PlanetWidth } from '../../core/planet';
+import { Coordinate } from "../../../core/domain/coordinates/coordinate";
+import { PlanetWidth, PlanetHeight, Planet } from "../../../core/domain/planet/planet";
 
 export class PlanetBuilder {
 	private width: PlanetWidth = PlanetWidth.from(2);

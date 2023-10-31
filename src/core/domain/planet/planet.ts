@@ -1,18 +1,27 @@
-import { Coordinate } from './coordinate';
+import { Coordinate } from '../coordinates/coordinate';
+import { CoordinateFactory } from '../coordinates/coordinate.factory';
+import { ValidCoordinate } from '../coordinates/coordinate.valid';
 
 export class Planet {
 	constructor(
 		private readonly width: PlanetWidth,
 		private readonly height: PlanetHeight,
-		private readonly obstacles: Coordinate[] = []
+		private readonly obstacles: Coordinate[] = [],
+		private readonly coordinateFactory: CoordinateFactory = new CoordinateFactory()
 	) {}
+
+	has(coordinate: Coordinate): boolean {
+		const isAValidCoordinate = coordinate instanceof ValidCoordinate;
+		const isInsideThePlanet = coordinate.getX() < this.height.value() && coordinate.getY() < this.width.value();
+		return isAValidCoordinate && isInsideThePlanet;
+	}
 
 	hasObstacleAt(coordinate: Coordinate): boolean {
 		return this.obstacles.some((obstacle) => obstacle.equals(coordinate));
 	}
 
 	joinEdge(coordinate: Coordinate): Coordinate {
-		return new Coordinate(this.joinEdgeX(coordinate.x), this.joinEdgeY(coordinate.y));
+		return this.coordinateFactory.create(this.joinEdgeX(coordinate.getX()), this.joinEdgeY(coordinate.getY()));
 	}
 
 	private joinEdgeY(positionY: number): number {
