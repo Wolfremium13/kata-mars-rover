@@ -28,4 +28,7 @@ export class Navigator {
 	turnRight(): void {
 		this.direction = this.direction.whatIsRight();
 	}
+	currentCoordinate(): Coordinate {
+		return this.coordinate;
+	}
 }

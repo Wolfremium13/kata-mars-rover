@@ -2,6 +2,7 @@ import { Coordinate } from '../../../core/domain/coordinates/coordinate';
 import { ValidCoordinate } from '../../../core/domain/coordinates/coordinate.valid';
 import { Direction } from '../../../core/domain/navigator/directions/direction';
 import { North } from '../../../core/domain/navigator/directions/north';
+import { Navigator } from '../../../core/domain/navigator/navigator';
 import { Planet } from '../../../core/domain/planet/planet';
 import { RoverDeployer } from '../../../core/domain/rovers/rover.deployer';
 import { PlanetBuilder } from './planet.builder';
@@ -27,7 +28,8 @@ export class RoverBuilder {
 	}
 
 	public build() {
-		const deployer = new RoverDeployer(this.planet);
-		return deployer.deploy(this.direction, this.coordinate.getX(), this.coordinate.getY());
+		const navigator = new Navigator(this.direction, this.coordinate);
+		const deployer = new RoverDeployer(this.planet, navigator);
+		return deployer.deploy();
 	}
 }
