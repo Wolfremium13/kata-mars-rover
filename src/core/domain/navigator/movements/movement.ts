@@ -1,7 +1,7 @@
 import { Coordinate } from "../../coordinates/coordinate";
-import { Planet } from "../../planet/planet";
+import { EdgeJoiner } from "../../planet/edge.joiner";
 
 
 export interface Movement {
-	getNextCoordinate(currentPosition: Coordinate, planet: Planet): Coordinate;
+	getNextCoordinate(currentPosition: Coordinate, edgeJoiner: EdgeJoiner): Coordinate;
 }

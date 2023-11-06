@@ -7,18 +7,20 @@ import { PlanetBuilder } from './builders/planet.builder';
 import { CoordinateBuilder } from './builders/coordinate.builder';
 import { NavigatorBuilder } from './builders/navigator.builder';
 import { ObstacleFinder } from '../../core/domain/planet/obstacle.finder';
+import { EdgeJoiner } from '../../core/domain/planet/edge.joiner';
 
 describe('Movements should', () => {
 	describe('be able to', () => {
 		const planetWithoutObstacles = new PlanetBuilder().withHeight(10).withWidth(10).build();
 		const obstacleFinder = new ObstacleFinder(planetWithoutObstacles);
+		const edgeJoiner = new EdgeJoiner(planetWithoutObstacles);
 		describe('move forward', () => {
 			const startPosition = new CoordinateBuilder().withX(5).withY(5).build();
 			it('when facing north', () => {
 				const direction = new North();
 				const navigator = new NavigatorBuilder().withCoordinate(startPosition).withDirection(direction).build();
 
-				navigator.moveForward(planetWithoutObstacles, obstacleFinder);
+				navigator.moveForward(edgeJoiner, obstacleFinder);
 
 				const expectedCoordinate = new CoordinateBuilder().withX(5).withY(6).build();
 				const expectedNavigator = new NavigatorBuilder()
@@ -32,7 +34,7 @@ describe('Movements should', () => {
 				const direction = new South();
 				const navigator = new NavigatorBuilder().withCoordinate(startPosition).withDirection(direction).build();
 
-				navigator.moveForward(planetWithoutObstacles, obstacleFinder);
+				navigator.moveForward(edgeJoiner, obstacleFinder);
 
 				const expectedCoordinate = new CoordinateBuilder().withX(5).withY(4).build();
 				const expectedNavigator = new NavigatorBuilder()
@@ -46,7 +48,7 @@ describe('Movements should', () => {
 				const direction = new East();
 				const navigator = new NavigatorBuilder().withCoordinate(startPosition).withDirection(direction).build();
 
-				navigator.moveForward(planetWithoutObstacles, obstacleFinder);
+				navigator.moveForward(edgeJoiner, obstacleFinder);
 
 				const expectedCoordinate = new CoordinateBuilder().withX(6).withY(5).build();
 				const expectedNavigator = new NavigatorBuilder()
@@ -60,7 +62,7 @@ describe('Movements should', () => {
 				const direction = new West();
 				const navigator = new NavigatorBuilder().withCoordinate(startPosition).withDirection(direction).build();
 
-				navigator.moveForward(planetWithoutObstacles, obstacleFinder);
+				navigator.moveForward(edgeJoiner, obstacleFinder);
 
 				const expectedCoordinate = new CoordinateBuilder().withX(4).withY(5).build();
 				const expectedNavigator = new NavigatorBuilder()
@@ -77,7 +79,7 @@ describe('Movements should', () => {
 				const direction = new North();
 				const navigator = new NavigatorBuilder().withCoordinate(startPosition).withDirection(direction).build();
 
-				navigator.moveBackward(planetWithoutObstacles, obstacleFinder);
+				navigator.moveBackward(edgeJoiner, obstacleFinder);
 
 				const expectedCoordinate = new CoordinateBuilder().withX(5).withY(4).build();
 				const expectedNavigator = new NavigatorBuilder()
@@ -91,7 +93,7 @@ describe('Movements should', () => {
 				const direction = new South();
 				const navigator = new NavigatorBuilder().withCoordinate(startPosition).withDirection(direction).build();
 
-				navigator.moveBackward(planetWithoutObstacles, obstacleFinder);
+				navigator.moveBackward(edgeJoiner, obstacleFinder);
 
 				const expectedCoordinate = new CoordinateBuilder().withX(5).withY(6).build();
 				const expectedNavigator = new NavigatorBuilder()
@@ -105,7 +107,7 @@ describe('Movements should', () => {
 				const direction = new East();
 				const navigator = new NavigatorBuilder().withCoordinate(startPosition).withDirection(direction).build();
 
-				navigator.moveBackward(planetWithoutObstacles, obstacleFinder);
+				navigator.moveBackward(edgeJoiner, obstacleFinder);
 
 				const expectedCoordinate = new CoordinateBuilder().withX(4).withY(5).build();
 				const expectedNavigator = new NavigatorBuilder()
@@ -119,7 +121,7 @@ describe('Movements should', () => {
 				const direction = new West();
 				const navigator = new NavigatorBuilder().withCoordinate(startPosition).withDirection(direction).build();
 
-				navigator.moveBackward(planetWithoutObstacles, obstacleFinder);
+				navigator.moveBackward(edgeJoiner, obstacleFinder);
 
 				const expectedCoordinate = new CoordinateBuilder().withX(6).withY(5).build();
 				const expectedNavigator = new NavigatorBuilder()

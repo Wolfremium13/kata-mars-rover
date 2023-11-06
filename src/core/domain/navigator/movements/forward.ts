@@ -1,15 +1,15 @@
 import { Coordinate } from '../../coordinates/coordinate';
 import { CoordinateFactory } from '../../coordinates/coordinate.factory';
 import { Direction } from '../directions/direction';
-import { Planet } from '../../planet/planet';
 import { Movement } from './movement';
+import { EdgeJoiner } from '../../planet/edge.joiner';
 
 export class MoveForward implements Movement {
 	constructor(
 		private readonly direction: Direction,
 		private readonly coordinateFactory: CoordinateFactory = new CoordinateFactory()
 	) {}
-	getNextCoordinate(currentPosition: Coordinate, planet: Planet): Coordinate {
+	getNextCoordinate(currentPosition: Coordinate, edgeJoiner: EdgeJoiner): Coordinate {
 		const mapDirectionToMovement = {
 			N: () => this.moveNorth(currentPosition),
 			S: () => this.moveSouth(currentPosition),
@@ -17,7 +17,7 @@ export class MoveForward implements Movement {
 			W: () => this.moveWest(currentPosition),
 		};
 		const position = mapDirectionToMovement[this.direction.getCode()]();
-		return planet.joinEdge(position);
+		return edgeJoiner.resolveBorderCrossing(position);
 	}
 
 	private moveNorth(currentPosition: Coordinate) {
