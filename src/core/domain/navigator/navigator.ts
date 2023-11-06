@@ -3,21 +3,22 @@ import { Direction } from './directions/direction';
 import { Planet } from '../planet/planet';
 import { MoveBackward } from './movements/backward';
 import { MoveForward } from './movements/forward';
+import { ObstacleFinder } from '../planet/obstacle.finder';
 
 export class Navigator {
 	constructor(private direction: Direction, private coordinate: Coordinate) {}
-	moveForward(planet: Planet): void {
+	moveForward(planet: Planet, obstacleFinder: ObstacleFinder): void {
 		const movement = new MoveForward(this.direction);
 		const nextCoordinate = movement.getNextCoordinate(this.coordinate, planet);
-		if (planet.hasObstacleAt(nextCoordinate)) {
+		if (obstacleFinder.findObstacleIn(nextCoordinate)) {
 			return;
 		}
 		this.coordinate = nextCoordinate;
 	}
-	moveBackward(planet: Planet): void {
+	moveBackward(planet: Planet, obstacleFinder: ObstacleFinder): void {
 		const movement = new MoveBackward(this.direction);
 		const nextCoordinate = movement.getNextCoordinate(this.coordinate, planet);
-		if (planet.hasObstacleAt(nextCoordinate)) {
+		if (obstacleFinder.findObstacleIn(nextCoordinate)) {
 			return;
 		}
 		this.coordinate = nextCoordinate;
